@@ -1,5 +1,6 @@
 ﻿using culqi.net;
 using Newtonsoft.Json.Linq;
+using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,7 +29,7 @@ namespace Demo.Controllers
 
         // POST api/values
         [HttpPost]       
-        public ResponseCulqi Post([FromBody] dynamic json)
+        public RestResponse Post([FromBody] dynamic json)
         {
             security = new Security();
             security.public_key = "INSERTE_SU_LLAVE_PUBLICA";
@@ -58,12 +59,12 @@ namespace Demo.Controllers
 
                 if (encrypt == "1")
                 {
-                    ResponseCulqi json_object = new Charge(security).Create(map, security.rsa_id, security.rsa_key);
+                    RestResponse json_object = new Charge(security).Create(map, security.rsa_id, security.rsa_key);
                     return json_object;
                 }
                 else
                 {
-                    ResponseCulqi json_object = new Charge(security).Create(map);
+                    RestResponse json_object = new Charge(security).Create(map);
                     return json_object;
                 }
             }
@@ -95,12 +96,12 @@ namespace Demo.Controllers
 
                 if (encrypt == "1")
                 {
-                    ResponseCulqi json_object = new Charge(security).Create(map, security.rsa_id, security.rsa_key);
+                    RestResponse json_object = new Charge(security).Create(map, security.rsa_id, security.rsa_key);
                     return json_object;
                 }
                 else
                 {
-                    ResponseCulqi json_object = new Charge(security).Create(map);
+                    RestResponse json_object = new Charge(security).Create(map);
                     return json_object;
                 }
             }

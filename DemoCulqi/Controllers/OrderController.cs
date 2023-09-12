@@ -1,4 +1,5 @@
 ﻿using culqi.net;
+using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +26,7 @@ namespace Demo.Controllers
 
         // POST api/values
         [HttpPost]
-        public ResponseCulqi Post([FromBody] dynamic json)
+        public RestResponse Post([FromBody] dynamic json)
         {
             security = new Security();
             security.public_key = "INSERTE_SU_LLAVE_PUBLICA";
@@ -63,7 +64,7 @@ namespace Demo.Controllers
                     {"expiration_date", epoch}
                 };
 
-              ResponseCulqi json_object = new Order(security).Create(map);
+              RestResponse json_object = new Order(security).Create(map);
               return json_object;
         }
       

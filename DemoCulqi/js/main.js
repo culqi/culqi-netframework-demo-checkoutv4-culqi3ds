@@ -18,9 +18,12 @@ let jsonParams = {
 
 async function generarOrder(){
   const { statusCode, data } = await generateOrderImpl();
-  if (data.statusCode === 201) {
+    console.log("El StatusCode es ", statusCode)
+    console.log("La data es ", data.Content)
+  if (data.StatusCode === 201) {
     console.log("Order",data);
-    var objeto = JSON.parse(data.body);
+      var objeto = JSON.parse(data.Content);
+      console.log("El id es ", objeto.id);
 
     return objeto.id;
   } else {
@@ -56,9 +59,9 @@ window.addEventListener(
             tokenId,
             parameters3DS,
           }); //2da llamada a cargo
-          var objeto = JSON.parse(responseCharge.data.body);
+          var objeto = JSON.parse(responseCharge.data.Content);
           objResponse = objeto.object;
-          statusCode = responseCharge.data.statusCode;          
+          statusCode = responseCharge.data.StatusCode;          
           console.log(statusCode);
         } else {
           const responseCard = await createCardImpl({
@@ -67,9 +70,9 @@ window.addEventListener(
             deviceId,
             parameters3DS,
           }); //2da llamada a creacion de CARD, validacion de 1 sol
-          var objeto = JSON.parse(responseCard.data.body);
+          var objeto = JSON.parse(responseCard.data.Content);
           objResponse = objeto.object;
-          statusCode = responseCard.data.statusCode;
+          statusCode = responseCard.data.StatusCode;
         }
 
         if (statusCode === 201) {
@@ -111,16 +114,16 @@ window.culqi = async () => {
         tokenId,
       }); //1ra llamada a cargo
      
-      console.log(responseCharge.data.body)
-      objResponse = responseCharge.data.body;
-      statusCode = responseCharge.data.statusCode;
+      console.log(responseCharge.data.Content)
+      objResponse = responseCharge.data.Content;
+      statusCode = responseCharge.data.StatusCode;
       console.log(statusCode);
     } else {
       customerId = selectors.customerCustomFormElement.value;
       const responseCard = await createCardImpl({ customerId, tokenId, deviceId }); // 1ra llamada a creacion de CARDS
-      console.log(responseCard.data.body)
-      objResponse = responseCard.data.body;
-      statusCode = responseCard.data.statusCode;
+      console.log(responseCard.data.Content)
+      objResponse = responseCard.data.Content;
+      statusCode = responseCard.data.StatusCode;
     }
     if (statusCode === 200) {
     var objeto = JSON.parse(objResponse);
@@ -159,7 +162,7 @@ async function createCustomer() {
   const dataCustomer = await createCustomerImpl({
     ...customerInfo,
   });
-  var objeto = JSON.parse(dataCustomer.data.body);
+  var objeto = JSON.parse(dataCustomer.data.Content);
   $("#response_customer").text(objeto.id);
   console.log(objeto.id);
 }
