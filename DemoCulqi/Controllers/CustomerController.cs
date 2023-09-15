@@ -29,7 +29,7 @@ namespace Demo.Controllers
 
         // POST api/values
         [HttpPost]
-        public RestResponse Post([FromBody] dynamic json)
+        public HttpResponseMessage Post([FromBody] dynamic json)
         {
             security = new Security();
             security.public_key = "INSERTE_SU_LLAVE_PUBLICA";
@@ -57,7 +57,7 @@ namespace Demo.Controllers
         {"phone_number", Convert.ToInt32(phone_number)}
     };
 
-            RestResponse json_object = new Customer(security).Create(map);
+            HttpResponseMessage json_object = new Customer(security).Create(map);
             return json_object;
         }
 
