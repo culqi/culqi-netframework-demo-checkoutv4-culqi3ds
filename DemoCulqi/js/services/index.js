@@ -18,9 +18,6 @@ class Service {
   };
   
   #http2 = async ({ endPoint, method = "POST", body = {}, headers = {} }) => {
-  console.log("AQUIIIIII IMPORTANTE");
-  console.log(this.#BASE_URL); 
-  console.log(endPoint); 
 	let statusCode = 502; 
 	try {
 	    const response = await $.ajax({

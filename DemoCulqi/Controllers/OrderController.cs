@@ -5,8 +5,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Formatting;
+using System.Text;
 using System.Text.Json;
 using System.Web.Http;
+using System.Web.Http.Results;
 
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -26,7 +29,7 @@ namespace Demo.Controllers
 
         // POST api/values
         [HttpPost]
-        public RestResponse Post([FromBody] dynamic json)
+        public HttpResponseMessage Post([FromBody] dynamic json)
         {
             security = new Security();
             security.public_key = "pk_test_e94078b9b248675d";
@@ -64,8 +67,9 @@ namespace Demo.Controllers
                     {"expiration_date", epoch}
                 };
 
-              RestResponse json_object = new Order(security).Create(map);
-              return json_object;
+            HttpResponseMessage json_object = new Order(security).Create(map);
+            return json_object;
+
         }
       
 

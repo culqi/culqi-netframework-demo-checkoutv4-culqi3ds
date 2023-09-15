@@ -29,7 +29,7 @@ namespace Demo.Controllers
 
         // POST api/values
         [HttpPost]       
-        public RestResponse Post([FromBody] dynamic json)
+        public HttpResponseMessage Post([FromBody] dynamic json)
         {
             security = new Security();
             security.public_key = "pk_test_e94078b9b248675d";
@@ -59,12 +59,12 @@ namespace Demo.Controllers
 
                 if (encrypt == "1")
                 {
-                    RestResponse json_object = new Charge(security).Create(map, security.rsa_id, security.rsa_key);
+                    HttpResponseMessage json_object = new Charge(security).Create(map, security.rsa_id, security.rsa_key);
                     return json_object;
                 }
                 else
                 {
-                    RestResponse json_object = new Charge(security).Create(map);
+                    HttpResponseMessage json_object = new Charge(security).Create(map);
                     return json_object;
                 }
             }
@@ -96,12 +96,12 @@ namespace Demo.Controllers
 
                 if (encrypt == "1")
                 {
-                    RestResponse json_object = new Charge(security).Create(map, security.rsa_id, security.rsa_key);
+                    HttpResponseMessage json_object = new Charge(security).Create(map, security.rsa_id, security.rsa_key);
                     return json_object;
                 }
                 else
                 {
-                    RestResponse json_object = new Charge(security).Create(map);
+                    HttpResponseMessage json_object = new Charge(security).Create(map);
                     return json_object;
                 }
             }
