@@ -1,4 +1,5 @@
 ﻿using culqi.net;
+using DemoCulqi.Controllers;
 using RestSharp;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,7 @@ namespace Demo.Controllers
     public class OrderController : ApiController
     {
         Security security = null;
+        GenericController gc = new GenericController();
         // GET: api/values
         [HttpGet]
         public IEnumerable<string> Get()
@@ -31,13 +33,7 @@ namespace Demo.Controllers
         [HttpPost]
         public HttpResponseMessage Post([FromBody] dynamic json)
         {
-            security = new Security();
-            security.public_key = "INSERTE_SU_LLAVE_PUBLICA";
-            security.secret_key = "INSERTE_SU_LLAVE_PRIVADA";
-            security.rsa_id = "INSERTE_SU_RSA_ID";
-            security.rsa_key = "INSERTE_SU_LLAVE_RSA";
-
-
+            security = gc.securityKeys();
 
             Int32 amount = json.amount;
             string currency_code = json.currency_code;
